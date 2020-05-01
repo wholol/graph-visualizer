@@ -170,6 +170,7 @@
   <ItemGroup>
     <ClInclude Include="src\Grid.h" />
     <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\Location.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

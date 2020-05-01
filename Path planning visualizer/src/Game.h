@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML\Graphics.hpp>
-#include <string>
+#include "Grid.h"
 
 class Game {			//game class. should have render, update/events, quit and initialize.
 
@@ -18,14 +18,10 @@ public:
 
 
 private:
-
-
 	bool quitgame = false;			//quit game
 	bool MainMenu = true;
-
-	int FrameCounter = 0;						//frame counter
-
-
+	Grid grid;
+	sf::Mouse mouse;
 	sf::Event event;					//events class
 	sf::RenderWindow createwindow;		//windows class
 	bool GameOver = false;				//gameover boolean

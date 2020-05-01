@@ -1,16 +1,18 @@
 #include "Game.h"
-
+#include <thread>
 
 Game::Game(int screenwidth, int screenheight, const std::string& title, int framerate)
-	:createwindow(sf::VideoMode(screenwidth, screenheight), title)
+	:createwindow(sf::VideoMode(screenwidth, screenheight), title),
+	grid(screenwidth,screenheight,mouse,createwindow)
 
-{
-
-}
+{}
 
 
 void Game::render() {		//rendering
 
+	grid.drawGrid();		
+
+	
 	createwindow.display();
 }
 
@@ -20,6 +22,18 @@ void Game::main_menu()
 }
 
 void Game::update() {		//update game 
+
+	
+	std::this_thread::sleep_for(std::chrono::milliseconds(70));
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {			//sets up obstacles for the grid.
+		grid.setObstacle();
+	}
+
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {			//sets up obstacles for the grid.
+		grid.setSource();
+		grid.setTarget();
+	}
+
 
 
 	createwindow.clear();
