@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include "Grid.h"
+#include "Graph.h"
 
 class Game {			//game class. should have render, update/events, quit and initialize.
 
@@ -21,6 +22,7 @@ private:
 	bool quitgame = false;			//quit game
 	bool MainMenu = true;
 	Grid grid;
+	Graph graph;
 	sf::Mouse mouse;
 	sf::Event event;					//events class
 	sf::RenderWindow createwindow;		//windows class

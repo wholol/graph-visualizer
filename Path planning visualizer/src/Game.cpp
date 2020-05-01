@@ -3,16 +3,14 @@
 
 Game::Game(int screenwidth, int screenheight, const std::string& title, int framerate)
 	:createwindow(sf::VideoMode(screenwidth, screenheight), title),
-	grid(screenwidth,screenheight,mouse,createwindow)
-
+	grid(screenwidth,screenheight,mouse,createwindow),
+	graph(grid.getTileNums())		
 {}
 
 
 void Game::render() {		//rendering
 
 	grid.drawGrid();		
-
-	
 	createwindow.display();
 }
 

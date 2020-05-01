@@ -10,6 +10,7 @@ public:
 	void setObstacle();
 	void setTarget();
 	void setSource();
+	std::tuple<int, int> getTileNums() const;
 
 private:
 	std::vector<sf::RectangleShape> TileMap;

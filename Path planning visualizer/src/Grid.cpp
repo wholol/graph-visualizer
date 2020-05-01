@@ -165,6 +165,11 @@ void Grid::setSource()
 	}
 }
 
+std::tuple<int, int> Grid::getTileNums() const
+{
+	return std::make_tuple(NumTilesX, NumTilesY);
+}
+
 void Grid::updateSrcPos(const Location& loc)
 {
 	srcpos.posx = loc.posx;
