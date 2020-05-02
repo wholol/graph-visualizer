@@ -49,13 +49,16 @@ void Grid::setObstacle()
 	int x = (int)(mouseposx / TileDimension);		//scale mouse coodinates
 	int y = (int)(mouseposy / TileDimension);		//scale mouse coordinats
 	
-	outofBounds(x, y);
+	if (outofBounds(x, y)) {
+		return;
+	}
 
 	Location mouseloc = { x , y };	//cache mouse location of the grid
 
 	//reset obstacle colour to open colour
 	if (getTileColor(mouseloc) == obstacleTileColour) {
 		setTileColor(mouseloc, openTileColour);
+		Obstacles.erase(std::remove(Obstacles.begin(), Obstacles.end(), mouseloc), Obstacles.end());
 		return;
 	}
 
@@ -68,17 +71,21 @@ void Grid::setObstacle()
 	}
 
 	setTileColor(mouseloc, obstacleTileColour);		//set the tile colour 
+	Obstacles.emplace_back(mouseloc);
 
 }
 
 void Grid::setTarget()
 {
+
 	int mouseposx = mouse.getPosition(createwindow).x;
 	int mouseposy = mouse.getPosition(createwindow).y;
 	int x = (int)(mouseposx / TileDimension);
 	int y = (int)(mouseposy / TileDimension);
 
-	outofBounds(x, y);
+	if (outofBounds(x, y)) {
+		return;
+	}
 
 	Location prevTargetLoc;			//cache the previous Target location
 	Location mouseLoc = { x , y };
@@ -109,7 +116,7 @@ void Grid::setTarget()
 
 			if (getTileColor(newTargetLoc) == openTileColour) {		//if the new target tile is open
 				setTileColor(newTargetLoc, targetTileColour);		//set the tile colour 
-				updateSrcPos(newTargetLoc);				//update the target position.
+				updateTargetPos(newTargetLoc);				//update the target position.
 				setTileColor(prevTargetLoc, openTileColour);	//set the tile colour of the old target position to open
 				changingTargetPos = false;
 				break;
@@ -125,7 +132,9 @@ void Grid::setSource()
 	int x = (int)(mouseposx / TileDimension);
 	int y = (int)(mouseposy / TileDimension);
 
-	outofBounds(x, y);
+	if (outofBounds(x, y)) {
+		return;
+	}
 
 	Location prevSrcLoc;			//cache the previous source location
 	Location mouseLoc = { x , y };
@@ -167,12 +176,25 @@ void Grid::setSource()
 
 void Grid::ColourVisitedTile(const Location & loc)
 {
+	if (loc == srcpos || loc == targetpos) return;	//do not recolour srcpos
 	setTileColor(loc, visitedTileColour);
 }
 
 void Grid::ColourVisitingTile(const Location & loc)
 {
+	if (loc == srcpos || loc == targetpos) return;	//do not recolour target pos
 	setTileColor(loc, visitngTileColour);
+}
+
+void Grid::ColourPathTile(const Location & loc)
+{
+	if (loc == srcpos || loc == targetpos) return;	//do not recolour target pos
+	setTileColor(loc, pathTileColour);
+}
+
+std::vector<Location> Grid::getObstacleLocation() const
+{
+	return Obstacles;
 }
 
 std::tuple<int, int> Grid::getTileNums() const

@@ -94,15 +94,12 @@ node& Graph::getNode(const Location& loc)
 {
 	assert(loc.posx * totalXTiles + loc.posy < totalXTiles * totalYTiles);
 	assert(loc.posx * totalXTiles + loc.posy >= 0);
-	
-
-
 	return nodes[loc.posx * totalXTiles + loc.posy];		//get desired node
 }
 
-std::vector<node> Graph::getallnodes() const
+int Graph::getnumnodes() const
 {
-	return nodes;
+	return totalXTiles * totalYTiles;
 }
 
 

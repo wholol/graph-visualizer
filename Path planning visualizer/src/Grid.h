@@ -12,17 +12,20 @@ public:
 	void setSource();
 	void ColourVisitedTile(const Location& loc);
 	void ColourVisitingTile(const Location& loc);
+	void ColourPathTile(const Location& loc);
+	std::vector<Location> getObstacleLocation() const;
 	std::tuple<int, int> getTileNums() const;
 	Location getTargetPos() const;
 	Location getSrcPos() const;
 
 private:
 	std::vector<sf::RectangleShape> TileMap;
+	std::vector<Location> Obstacles;		//store obstacle locations
 	
 	const sf::Mouse& mouse;
 	sf::RenderWindow& createwindow;
 	
-	static constexpr int TileDimension = 50;		//dimension of tile
+	static constexpr int TileDimension = 60;		//dimension of tile
 	static constexpr int OutlineThickness = 2;
 	
 	const int screenwidth;
@@ -35,11 +38,12 @@ private:
 	Location targetpos;		//initialzie target position
 	
 	sf::Color openTileColour = sf::Color::White;
-	sf::Color obstacleTileColour = sf::Color::Blue;
+	sf::Color obstacleTileColour = sf::Color::Black;
 	sf::Color srcTileColour = sf::Color::Red;
-	sf::Color targetTileColour = sf::Color::Cyan;
-	sf::Color visitedTileColour = sf::Color::Magenta;
-	sf::Color visitngTileColour = sf::Color::Green;
+	sf::Color targetTileColour = sf::Color::Yellow;
+	sf::Color visitedTileColour = sf::Color::Blue;
+	sf::Color visitngTileColour = sf::Color::Cyan;
+	sf::Color pathTileColour = sf::Color::Green;
 
 	
 	bool changingSrcPos = false;

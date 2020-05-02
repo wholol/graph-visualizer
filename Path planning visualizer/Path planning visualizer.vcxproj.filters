@@ -27,7 +27,7 @@
     <ClCompile Include="src\Graph.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\BFS.cpp">
+    <ClCompile Include="src\DFS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,7 +44,7 @@
     <ClInclude Include="src\Graph.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\BFS.h">
+    <ClInclude Include="src\DFS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

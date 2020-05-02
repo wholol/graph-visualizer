@@ -22,8 +22,5 @@ private:
 public:
 	Graph(std::tuple<int,int> getNumTiles);		//construct the graph
 	node& getNode(const Location& loc);
-	std::vector<node> getallnodes() const;
-
-
-
+	int getnumnodes() const;
 };
