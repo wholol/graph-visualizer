@@ -1,10 +1,12 @@
 #include "Game.h"
 #include <thread>
+#include <iostream>
 
 Game::Game(int screenwidth, int screenheight, const std::string& title, int framerate)
 	:createwindow(sf::VideoMode(screenwidth, screenheight), title),
 	grid(screenwidth,screenheight,mouse,createwindow),
-	graph(grid.getTileNums())		
+	graph(grid.getTileNums()),
+	bfs(graph)
 {}
 
 
@@ -32,7 +34,18 @@ void Game::update() {		//update game
 		grid.setTarget();
 	}
 
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+		solve = true;
+	}
 
+	if (solve){
+		Location srcpos = grid.getSrcPos();
+		Location targetpos = grid.getTargetPos();
+		bfs.SolveAlgorithm(srcpos,targetpos , grid,createwindow);
+		solve = false;
+	}
+
+	std::cout << "done solving" << std::endl;
 
 	createwindow.clear();
 

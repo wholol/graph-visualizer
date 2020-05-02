@@ -10,7 +10,11 @@ public:
 	void setObstacle();
 	void setTarget();
 	void setSource();
+	void ColourVisitedTile(const Location& loc);
+	void ColourVisitingTile(const Location& loc);
 	std::tuple<int, int> getTileNums() const;
+	Location getTargetPos() const;
+	Location getSrcPos() const;
 
 private:
 	std::vector<sf::RectangleShape> TileMap;
@@ -18,7 +22,7 @@ private:
 	const sf::Mouse& mouse;
 	sf::RenderWindow& createwindow;
 	
-	static constexpr int TileDimension = 25;		//dimension of tile
+	static constexpr int TileDimension = 50;		//dimension of tile
 	static constexpr int OutlineThickness = 2;
 	
 	const int screenwidth;
@@ -34,6 +38,8 @@ private:
 	sf::Color obstacleTileColour = sf::Color::Blue;
 	sf::Color srcTileColour = sf::Color::Red;
 	sf::Color targetTileColour = sf::Color::Cyan;
+	sf::Color visitedTileColour = sf::Color::Magenta;
+	sf::Color visitngTileColour = sf::Color::Green;
 
 	
 	bool changingSrcPos = false;

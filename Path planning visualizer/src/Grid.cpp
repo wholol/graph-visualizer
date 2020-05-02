@@ -165,9 +165,29 @@ void Grid::setSource()
 	}
 }
 
+void Grid::ColourVisitedTile(const Location & loc)
+{
+	setTileColor(loc, visitedTileColour);
+}
+
+void Grid::ColourVisitingTile(const Location & loc)
+{
+	setTileColor(loc, visitngTileColour);
+}
+
 std::tuple<int, int> Grid::getTileNums() const
 {
 	return std::make_tuple(NumTilesX, NumTilesY);
+}
+
+Location Grid::getTargetPos() const
+{
+	return targetpos;
+}
+
+Location Grid::getSrcPos() const
+{
+	return srcpos;
 }
 
 void Grid::updateSrcPos(const Location& loc)
