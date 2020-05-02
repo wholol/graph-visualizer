@@ -96,7 +96,7 @@ void Grid::setTarget()
 
 		Location newTargetLoc = { x , y };		//keep polling for new target location
 
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
 
 			if (getTileColor(newTargetLoc) == obstacleTileColour) {			//if tile is obstacle, continue
 				continue;
@@ -143,7 +143,7 @@ void Grid::setSource()
 
 		Location newSrcLoc = { x , y };
 
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
 
 			if (getTileColor(newSrcLoc) == obstacleTileColour) {
 				continue;
