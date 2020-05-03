@@ -7,7 +7,8 @@ Game::Game(int screenwidth, int screenheight, const std::string& title, int fram
 	grid(screenwidth,screenheight,mouse,createwindow),
 	graph(grid.getTileNums()),
 	dfs(graph),
-	bfs(graph)
+	bfs(graph),
+	aStar(graph)
 {}
 
 
@@ -43,13 +44,9 @@ void Game::update() {		//update game
 		Location srcpos = grid.getSrcPos();
 		Location targetpos = grid.getTargetPos();
 		std::vector<Location> Obstacles = grid.getObstacleLocation();
-		std::cout << "solving.." << std::endl;
-		bfs.SolveAlgorithm(srcpos,targetpos,Obstacles,grid,createwindow);
-		bfs.drawpath(grid);
+		aStar.SolveAlgorithm(srcpos,targetpos,Obstacles,grid,createwindow);
 		solve = false;
 	}
-	std::cout << "solving.." << std::endl;
-	
 
 	createwindow.clear();
 

@@ -4,6 +4,7 @@
 #include "Graph.h"
 #include "DFS.h"
 #include "BFS.h"
+#include "AStar.h"
 
 class Game {			//game class. should have render, update/events, quit and initialize.
 
@@ -27,6 +28,7 @@ private:
 	Graph graph;
 	DFS dfs;
 	BFS bfs;
+	AStar aStar;
 	sf::Mouse mouse;
 	sf::Event event;					//events class
 	sf::RenderWindow createwindow;		//windows class

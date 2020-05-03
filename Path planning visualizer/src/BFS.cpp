@@ -18,32 +18,32 @@ void BFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 
 	while (!deque.empty() && !targetreached) {
 
-		Location curr = std::move(deque.front());
+		Location curr = std::move(deque.front());		//get the current location
 		deque.pop_front();
-			grid.ColourVisitedTile(graph.getNode(curr).nodeloc);
+		grid.ColourVisitedTile(curr);		//colour current location
 		
 		grid.drawGrid();
 		createwindow.display();
-		//std::this_thread::sleep_for(std::chrono::milliseconds(25));
+
 
 		for (auto &neighbour : graph.getNode(curr).neighbours) {
-
-			if (neighbour.nodeloc == targetpos) {
+			Location &neighbourloc = neighbour.nodeloc;
+			if (neighbourloc == targetpos) {
 				targetreached = true;
 			}
 
-			if (graph.getNode(neighbour.nodeloc).Visited) {
+			if (graph.getNode(neighbourloc).Visited) {
 				continue;
 			}
 
-			else if (!graph.getNode(neighbour.nodeloc).Visited) {
-				if (graph.getNode(neighbour.nodeloc).isObstacle) {
+			else if (!graph.getNode(neighbourloc).Visited) {
+				if (graph.getNode(neighbourloc).isObstacle) {
 
 				}
 				else {
-					deque.emplace_back(neighbour.nodeloc);
-					graph.getNode(neighbour.nodeloc).Visited = true;
-					grid.ColourVisitingTile(neighbour.nodeloc);
+					deque.emplace_back(neighbourloc);
+					graph.getNode(neighbourloc).Visited = true;
+					grid.ColourVisitingTile(neighbourloc);
 				}
 			}
 		}

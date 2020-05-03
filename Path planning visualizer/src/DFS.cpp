@@ -20,14 +20,14 @@ void DFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 
 		Location curr = std::move(stack.top());
 		stack.pop();
-		grid.ColourVisitedTile(graph.getNode(curr).nodeloc);
+		grid.ColourVisitedTile(curr);
 
 		grid.drawGrid();					
 		createwindow.display();
 		
 		for (auto &neighbour: graph.getNode(curr).neighbours) {		
 			
-			Location neighbourloc = neighbour.nodeloc;
+			Location &neighbourloc = neighbour.nodeloc;
 
 			if (neighbourloc == targetpos) {
 				targetreached = true;

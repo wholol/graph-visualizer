@@ -28,12 +28,12 @@ Graph::Graph(std::tuple<int,int> getNumTile)
 			if (x < totalXTiles - 1)
 				nodes[x*totalXTiles + y].neighbours.emplace_back(x + 1, y);
 
-			// We can also connect diagonally
-			if (y>0 && x>0)
+
+			if (y> 0 && x> 0)
 				nodes[x*totalXTiles + y].neighbours.emplace_back(x - 1, y - 1);
-			if (y< totalXTiles -1 && x>0)
+			if (y < totalXTiles -1 && x > 0)
 				nodes[x*totalXTiles + y].neighbours.emplace_back(x - 1, y + 1);
-			if (y>0 && x< totalXTiles -1)
+			if (y > 0 && x < totalXTiles -1)
 				nodes[x*totalXTiles + y].neighbours.emplace_back(x + 1, y - 1);
 			if (y< totalXTiles - 1 && x< totalXTiles -1)
 				nodes[x*totalXTiles + y].neighbours.emplace_back(x + 1, y + 1);
@@ -112,14 +112,9 @@ Graph::Graph(std::tuple<int,int> getNumTile)
 
 node& Graph::getNode(const Location& loc) 
 {
-	//assert(loc.posx * totalXTiles + loc.posy < totalXTiles * totalYTiles);
-	//assert(loc.posx * totalXTiles + loc.posy >= 0);
+	assert(loc.posx * totalXTiles + loc.posy < totalXTiles * totalYTiles);
+	assert(loc.posx * totalXTiles + loc.posy >= 0);
 	return nodes[loc.posx * totalXTiles + loc.posy];		//get desired node
-}
-
-int Graph::getnumnodes() const
-{
-	return totalXTiles * totalYTiles;
 }
 
 

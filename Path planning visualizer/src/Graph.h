@@ -2,6 +2,7 @@
 #include "Location.h"
 #include <vector>
 
+/*node struct*/
 struct node {
 	node(int posx, int posy) :nodeloc({ posx,posy }) {}	//construct location
 
@@ -9,9 +10,13 @@ struct node {
 	bool Visited = false;
 	node* parent = nullptr;		//pointer to parent node
 	bool isObstacle = false;	//is the node an obstacle?
-	std::vector<node> neighbours;			//stor the vector of neigghbours for the node
+	double hCost = INFINITY;				//heuristics for node (distance from current node to target).
+	double gCost = INFINITY;				//heuristics for node (distance from start to curent node).
+	double fCost;
+	std::vector<node> neighbours;			//store the vector of neigghbours for the node
 };
 
+/* graph class*/
 class Graph{
 
 private:
@@ -22,5 +27,4 @@ private:
 public:
 	Graph(std::tuple<int,int> getNumTiles);		//construct the graph
 	node& getNode(const Location& loc);
-	int getnumnodes() const;
 };
