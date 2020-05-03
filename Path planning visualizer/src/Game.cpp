@@ -44,8 +44,8 @@ void Game::update() {		//update game
 		Location targetpos = grid.getTargetPos();
 		std::vector<Location> Obstacles = grid.getObstacleLocation();
 		std::cout << "solving.." << std::endl;
-		dfs.SolveAlgorithm(srcpos,targetpos,Obstacles,grid,createwindow);
-		dfs.drawpath(grid);
+		bfs.SolveAlgorithm(srcpos,targetpos,Obstacles,grid,createwindow);
+		bfs.drawpath(grid);
 		solve = false;
 	}
 	std::cout << "solving.." << std::endl;

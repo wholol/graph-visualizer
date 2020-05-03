@@ -16,8 +16,4 @@ private:
 	Location targetpos;
 	std::stack<Location> stack;
 	bool targetreached = false;
-	
-
-
-
 };

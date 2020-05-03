@@ -18,17 +18,12 @@ void DFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 
 	while (!stack.empty() && !targetreached) {				
 
-		Location curr = stack.top();
+		Location curr = std::move(stack.top());
 		stack.pop();
-		std::cout << stack.size() << std::endl;
-		if (!graph.getNode(curr).Visited) {
-			graph.getNode(curr).Visited = true;
-			grid.ColourVisitedTile(graph.getNode(curr).nodeloc);
-		}
+		grid.ColourVisitedTile(graph.getNode(curr).nodeloc);
 
 		grid.drawGrid();					
 		createwindow.display();
-		std::this_thread::sleep_for(std::chrono::milliseconds(25));
 		
 		for (auto &neighbour: graph.getNode(curr).neighbours) {		
 			
@@ -44,6 +39,7 @@ void DFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 				}
 				else {
 					stack.push(neighbourloc);
+					graph.getNode(curr).Visited = true;
 					grid.ColourVisitingTile(neighbourloc);
 				}
 			}

@@ -165,6 +165,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\AStar.cpp" />
     <ClCompile Include="src\BFS.cpp" />
     <ClCompile Include="src\DFS.cpp" />
     <ClCompile Include="src\Graph.cpp" />
@@ -173,6 +174,7 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\AStar.h" />
     <ClInclude Include="src\BFS.h" />
     <ClInclude Include="src\DFS.h" />
     <ClInclude Include="src\Graph.h" />
