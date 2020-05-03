@@ -1,10 +1,7 @@
 #pragma once
 #include "Graph.h"
 #include "Grid.h"
-#include <queue>
 #include <stack>
-#include <memory>
-#include <list>
 
 class DFS {
 

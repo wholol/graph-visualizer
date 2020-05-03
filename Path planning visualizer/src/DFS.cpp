@@ -32,17 +32,19 @@ void DFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 		
 		for (auto &neighbour: graph.getNode(curr).neighbours) {		
 			
-			if (neighbour.nodeloc == targetpos) {
+			Location neighbourloc = neighbour.nodeloc;
+
+			if (neighbourloc == targetpos) {
 				targetreached = true;
 			}
 
-			if (!graph.getNode(neighbour.nodeloc).Visited){
-				if (graph.getNode(neighbour.nodeloc).isObstacle) {
+			if (!graph.getNode(neighbourloc).Visited){
+				if (graph.getNode(neighbourloc).isObstacle) {
 
 				}
 				else {
-					stack.push(neighbour.nodeloc);
-					grid.ColourVisitingTile(neighbour.nodeloc);
+					stack.push(neighbourloc);
+					grid.ColourVisitingTile(neighbourloc);
 				}
 			}
 		}

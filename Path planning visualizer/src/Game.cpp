@@ -6,7 +6,8 @@ Game::Game(int screenwidth, int screenheight, const std::string& title, int fram
 	:createwindow(sf::VideoMode(screenwidth, screenheight), title),
 	grid(screenwidth,screenheight,mouse,createwindow),
 	graph(grid.getTileNums()),
-	dfs(graph)
+	dfs(graph),
+	bfs(graph)
 {}
 
 
@@ -47,7 +48,7 @@ void Game::update() {		//update game
 		dfs.drawpath(grid);
 		solve = false;
 	}
-
+	std::cout << "solving.." << std::endl;
 	
 
 	createwindow.clear();

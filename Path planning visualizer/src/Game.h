@@ -3,6 +3,7 @@
 #include "Grid.h"
 #include "Graph.h"
 #include "DFS.h"
+#include "BFS.h"
 
 class Game {			//game class. should have render, update/events, quit and initialize.
 
@@ -25,6 +26,7 @@ private:
 	Grid grid;
 	Graph graph;
 	DFS dfs;
+	BFS bfs;
 	sf::Mouse mouse;
 	sf::Event event;					//events class
 	sf::RenderWindow createwindow;		//windows class
