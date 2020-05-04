@@ -9,4 +9,8 @@
 <img src="images/BFS.png">  
   
 ### Depth First Search (DFS)  
-<img src="images/DFS.png">  
+<img src="images/DFS.png">   
+  
+### Dijkstra's Algorithm   
+<img src="images/dijkstra.png">   
+  
