@@ -3,14 +3,14 @@
  
 ## Algorithms  
 ### A* algorithm  
-<img src="images/AStar.png">  
+<img src="images/AStar.png" width="450" height="450">  
   
 ### Breadth First Search (BFS)  
-<img src="images/BFS.png">  
+<img src="images/BFS.png"  width="450" height="450">  
   
 ### Depth First Search (DFS)  
-<img src="images/DFS.png">   
+<img src="images/DFS.png"  width="450" height="450">   
   
 ### Dijkstra's Algorithm   
-<img src="images/dijkstra.png">   
+<img src="images/dijkstra.png"  width="450" height="450">   
   
