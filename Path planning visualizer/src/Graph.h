@@ -23,8 +23,10 @@ private:
 	std::vector<node> nodes;			//all nodes in the graph
 	int totalXTiles;
 	int totalYTiles;
+	
+
 
 public:
 	Graph(std::tuple<int,int> getNumTiles);		//construct the graph
-	node& getNode(const Location& loc);
+	node* getNode(const Location& loc);
 };

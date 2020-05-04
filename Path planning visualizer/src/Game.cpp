@@ -40,11 +40,12 @@ void Game::update() {		//update game
 		solve = true;
 	}
 
-	if (solve){
+	if (true){
 		Location srcpos = grid.getSrcPos();
 		Location targetpos = grid.getTargetPos();
 		std::vector<Location> Obstacles = grid.getObstacleLocation();
 		aStar.SolveAlgorithm(srcpos,targetpos,Obstacles,grid,createwindow);
+		
 		solve = false;
 	}
 

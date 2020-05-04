@@ -9,10 +9,10 @@ DFS::DFS(Graph graph)
 void DFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, const std::vector<Location>& obstacles, Grid &grid, sf::RenderWindow& createwindow)
 {
 	for (const auto& obs : obstacles) {	//set obstacles
-		graph.getNode(obs).isObstacle = true;
+		graph.getNode(obs)->isObstacle = true;
 	}
 
-	node* srcnode = &(graph.getNode(srcpos));
+	node* srcnode = (graph.getNode(srcpos));
 	stack.push(srcnode);			//push into queue.
 
 	while (!stack.empty() && !targetreached) {				

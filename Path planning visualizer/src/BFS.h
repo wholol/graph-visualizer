@@ -8,7 +8,7 @@ class BFS {
 public:
 	BFS(Graph graph);
 	void SolveAlgorithm(const Location& srcpos, const Location& targetpos, const std::vector<Location>& obstacles, Grid &grid, sf::RenderWindow& createwindow);
-	void drawpath(Grid& grid);
+	void drawpath(Grid& grid, Location& targetpos);
 
 private:
 	Graph graph;

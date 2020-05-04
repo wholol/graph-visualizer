@@ -2,20 +2,19 @@
 #include <iostream>
 #include <thread>
 
-AStar::AStar(Graph graph)
+AStar::AStar(Graph &graph)
 	:graph(graph)
 {
-
-	
+	node* test = graph.getNode({ 0,0 });
 }
 
-void AStar::SolveAlgorithm(const Location & srcpos, const Location & targetpos, const std::vector<Location>& obstacles, Grid & grid, sf::RenderWindow & createwindow)
+void AStar::SolveAlgorithm(const Location& srcpos, const Location & targetpos, const std::vector<Location>& obstacles, Grid & grid, sf::RenderWindow & createwindow)
 {
 	this->srcpos = srcpos;
 	this->targetpos = targetpos;
 
 	for (const auto& obs : obstacles) {	//set obstacles
-		graph.getNode(obs).isObstacle = true;
+		graph.getNode(obs)->isObstacle = true;
 	}
 
 	auto fCostcomparator = [](node *leftnode, node *rightnode)
@@ -23,9 +22,9 @@ void AStar::SolveAlgorithm(const Location & srcpos, const Location & targetpos, 
 		return leftnode->fCost < rightnode->fCost;
 	};
 	
-	node *srcNode = &(graph.getNode(srcpos));
+	node *srcNode = (graph.getNode(srcpos));
 	srcNode->gCost = 0;
-	node* targetNode = &(graph.getNode(targetpos));
+	node* targetNode = (graph.getNode(targetpos));
 	srcNode->hCost = nodedistance(srcNode,targetNode);
 	pq.emplace_back(srcNode);					//push node into queue.
 
@@ -45,7 +44,7 @@ void AStar::SolveAlgorithm(const Location & srcpos, const Location & targetpos, 
 		createwindow.display();
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(40));
-
+		
 		for (auto &neighbour : curr->neighbours) {
 
 			if (neighbour->Visited || neighbour->isObstacle) {
@@ -67,12 +66,10 @@ void AStar::SolveAlgorithm(const Location & srcpos, const Location & targetpos, 
 					}
 				}
 			}
-			
 		}
-
 	}
 
-
+	drawpath(grid, targetpos);
 }
 
 double AStar::nodedistance(node* a, node* b)
@@ -80,4 +77,13 @@ double AStar::nodedistance(node* a, node* b)
 	int dx = (a->nodeloc.posx - b->nodeloc.posx);
 	int dy= (a->nodeloc.posy - b->nodeloc.posy);
 	return sqrt((dx * dx) + (dy * dy));			//sqrt(dx^2 - dy^2) for Euclidean	
+}
+
+void AStar::drawpath(Grid& grid, const Location& targetpos)
+{
+	node* traverse = graph.getNode(targetpos)->parent;
+	while (traverse != nullptr) {
+		grid.ColourPathTile(traverse->nodeloc);
+		traverse = traverse->parent;
+	}
 }

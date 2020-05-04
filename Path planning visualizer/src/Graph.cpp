@@ -5,22 +5,26 @@
 
 Graph::Graph(std::tuple<int,int> getNumTile)
 {
+	
 	 totalXTiles = std::get<0>(getNumTile);
 	 totalYTiles = std::get<1>(getNumTile);
+	 
 
+	
 	for (int i = 0; i < totalXTiles; ++i) {
 		for (int j = 0; j < totalYTiles; ++j) {
 			nodes.emplace_back(i , j);
 		}
 	}
+	
 
-	assert(nodes.size() == totalXTiles * totalYTiles);
-
+	assert(nodes->size() == totalXTiles * totalYTiles);
+	
 	for (int x = 0; x < totalXTiles; ++x) {
-		for (int y = 0; y < totalYTiles; ++y) {		
-			
+		for (int y = 0; y < totalYTiles; ++y) {
+	
 			if (y > 0)
-				nodes[x*totalXTiles + y].neighbours.emplace_back(&nodes[x*totalXTiles + (y - 1)]);
+				(nodes[x*totalXTiles + y]).neighbours.emplace_back(&nodes[x*totalXTiles + (y - 1)]);
 			if (y < totalXTiles - 1)
 				nodes[x*totalXTiles + y].neighbours.emplace_back(&nodes[x*totalXTiles + (y + 1)]);
 			if (x > 0)
@@ -31,13 +35,15 @@ Graph::Graph(std::tuple<int,int> getNumTile)
 
 			if (y > 0 && x > 0)
 				nodes[x*totalXTiles + y].neighbours.emplace_back(&nodes[(x - 1)*totalXTiles + (y - 1)]);
-			if (y < totalXTiles -1 && x > 0)
+			if (y < totalXTiles - 1 && x > 0)
 				nodes[x*totalXTiles + y].neighbours.emplace_back(&nodes[(x - 1)*totalXTiles + (y + 1)]);
-			if (y > 0 && x < totalXTiles -1)
+			if (y > 0 && x < totalXTiles - 1)
 				nodes[x*totalXTiles + y].neighbours.emplace_back(&nodes[(x + 1)*totalXTiles + (y - 1)]);
-			if (y< totalXTiles - 1 && x< totalXTiles -1)
+			if (y < totalXTiles - 1 && x < totalXTiles - 1)
 				nodes[x*totalXTiles + y].neighbours.emplace_back(&nodes[(x + 1)*totalXTiles + (y + 1)]);
-
+		}
+	}	
+			
 			/*if (x == 0 && y == 0) {			//top leeft corner case
 				nodes[x * totalXTiles + y].neighbours.emplace_back(x + 1, y + 1);
 				nodes[x * totalXTiles + y].neighbours.emplace_back(x + 1, y);
@@ -105,16 +111,20 @@ Graph::Graph(std::tuple<int,int> getNumTile)
 				nodes[x * totalXTiles + y].neighbours.emplace_back(x - 1, y);		//node to the left
 				nodes[x * totalXTiles + y].neighbours.emplace_back(x - 1, y - 1);	//top left node
 				nodes[x * totalXTiles + y].neighbours.emplace_back(x + 1, y - 1);	//top right node
-			}*/
+			}
 		}
-	}
+	}*/
+	
+		
 }
 
-node& Graph::getNode(const Location& loc) 
+node* Graph::getNode(const Location& loc) 
 {
-	assert(loc.posx * totalXTiles + loc.posy < totalXTiles * totalYTiles);
-	assert(loc.posx * totalXTiles + loc.posy >= 0);
-	return nodes[loc.posx * totalXTiles + loc.posy];		//get desired node
+	//assert(loc.posx * totalXTiles + loc.posy < totalXTiles * totalYTiles);
+	//assert(loc.posx * totalXTiles + loc.posy >= 0);
+
+	std::cout << &nodes[0] << std::endl;
+	return &nodes[loc.posx * totalXTiles + loc.posy];		//get desired node
 }
 
 

@@ -9,10 +9,10 @@ BFS::BFS(Graph graph)
 void BFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, const std::vector<Location>& obstacles, Grid &grid, sf::RenderWindow& createwindow)
 {
 	for (const auto& obs : obstacles) {	//set obstacles
-		graph.getNode(obs).isObstacle = true;
+		graph.getNode(obs)->isObstacle = true;
 	}
 
-	node* srcnode = &(graph.getNode(srcpos));
+	node* srcnode = (graph.getNode(srcpos));
 	deque.emplace_back(srcnode);			//push into queue.
 
 	while (!deque.empty() && !targetreached) {
@@ -48,13 +48,12 @@ void BFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 
 	return;
 }
-/*
-void BFS::drawpath(Grid& grid)
+
+void BFS::drawpath(Grid& grid, Location& targetpos)
 {
-	node* traverse = graph.getNode(targetpos).parent;
+	node* traverse = graph.getNode(targetpos)->parent;
 	while (traverse != nullptr) {
 		grid.ColourPathTile(traverse->nodeloc);
 		traverse = traverse->parent;
 	}
 }
-*/
