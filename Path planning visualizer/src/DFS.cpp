@@ -12,34 +12,35 @@ void DFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 		graph.getNode(obs).isObstacle = true;
 	}
 
-	this->srcpos = srcpos;
-	this->targetpos = targetpos;
-	stack.push(srcpos);			//push into queue.
+	node* srcnode = &(graph.getNode(srcpos));
+	stack.push(srcnode);			//push into queue.
 
 	while (!stack.empty() && !targetreached) {				
 
-		Location curr = std::move(stack.top());
+		node* curr = std::move(stack.top());
 		stack.pop();
-		grid.ColourVisitedTile(curr);
+		grid.ColourVisitedTile(curr->nodeloc);
 
 		grid.drawGrid();					
 		createwindow.display();
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(40));
 		
-		for (auto &neighbour: graph.getNode(curr).neighbours) {		
+		for (auto &neighbour: curr->neighbours) {		
 			
-			Location &neighbourloc = neighbour.nodeloc;
+			Location neighbourloc = neighbour->nodeloc;
 
 			if (neighbourloc == targetpos) {
 				targetreached = true;
 			}
 
-			if (!graph.getNode(neighbourloc).Visited){
-				if (graph.getNode(neighbourloc).isObstacle) {
-
+			if (!neighbour->Visited){
+				if (neighbour->isObstacle) {
+					continue;
 				}
 				else {
-					stack.push(neighbourloc);
-					graph.getNode(curr).Visited = true;
+					stack.push(neighbour);
+					neighbour->Visited = true;
 					grid.ColourVisitingTile(neighbourloc);
 				}
 			}
@@ -48,7 +49,7 @@ void DFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 
 	return;
 }
-
+/*
 void DFS::drawpath(Grid& grid)
 {
 	node* traverse = graph.getNode(targetpos).parent;
@@ -57,3 +58,4 @@ void DFS::drawpath(Grid& grid)
 		traverse = traverse->parent;
 	}
 }
+*/

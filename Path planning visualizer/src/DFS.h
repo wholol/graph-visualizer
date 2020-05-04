@@ -12,8 +12,6 @@ public:
 
 private:
 	Graph graph;
-	Location srcpos;
-	Location targetpos;
-	std::stack<Location> stack;
+	std::stack<node*> stack;
 	bool targetreached = false;
 };

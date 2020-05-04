@@ -12,9 +12,7 @@ public:
 
 private:
 	Graph graph;
-	Location srcpos;
-	Location targetpos;
-	std::deque<Location> deque;
+	std::deque<node*> deque;
 	bool targetreached = false;
 
 

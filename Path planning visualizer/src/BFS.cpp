@@ -12,37 +12,34 @@ void BFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 		graph.getNode(obs).isObstacle = true;
 	}
 
-	this->srcpos = srcpos;
-	this->targetpos = targetpos;
-	deque.emplace_back(srcpos);			//push into queue.
+	node* srcnode = &(graph.getNode(srcpos));
+	deque.emplace_back(srcnode);			//push into queue.
 
 	while (!deque.empty() && !targetreached) {
 
-		Location curr = std::move(deque.front());		//get the current location
+		node* curr = std::move(deque.front());		//get the current location
 		deque.pop_front();
-		grid.ColourVisitedTile(curr);		//colour current location
-		
+		grid.ColourVisitedTile(curr->nodeloc);		//colour current location
+
 		grid.drawGrid();
 		createwindow.display();
 
+		std::this_thread::sleep_for(std::chrono::milliseconds(40));
 
-		for (auto &neighbour : graph.getNode(curr).neighbours) {
-			Location &neighbourloc = neighbour.nodeloc;
-			if (neighbourloc == targetpos) {
+		for (auto &neighbour : curr->neighbours) {
+			Location neighbourloc = neighbour->nodeloc;
+			if (neighbour->nodeloc == targetpos) {
 				targetreached = true;
 			}
 
-			if (graph.getNode(neighbourloc).Visited) {
-				continue;
-			}
-
-			else if (!graph.getNode(neighbourloc).Visited) {
-				if (graph.getNode(neighbourloc).isObstacle) {
+			else if (!neighbour->Visited) {
+				if (neighbour->isObstacle) {
 
 				}
+
 				else {
-					deque.emplace_back(neighbourloc);
-					graph.getNode(neighbourloc).Visited = true;
+					deque.emplace_back(neighbour);
+					neighbour->Visited = true;
 					grid.ColourVisitingTile(neighbourloc);
 				}
 			}
@@ -51,7 +48,7 @@ void BFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 
 	return;
 }
-
+/*
 void BFS::drawpath(Grid& grid)
 {
 	node* traverse = graph.getNode(targetpos).parent;
@@ -60,3 +57,4 @@ void BFS::drawpath(Grid& grid)
 		traverse = traverse->parent;
 	}
 }
+*/

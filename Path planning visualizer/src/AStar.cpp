@@ -1,5 +1,7 @@
 #include "AStar.h"
 #include <iostream>
+#include <thread>
+
 AStar::AStar(Graph graph)
 	:graph(graph)
 {
@@ -21,18 +23,18 @@ void AStar::SolveAlgorithm(const Location & srcpos, const Location & targetpos, 
 		return leftnode->fCost < rightnode->fCost;
 	};
 	
-	node &srcNode = graph.getNode(srcpos);
-	srcNode.gCost = 0;
-	node targetNode = graph.getNode(targetpos);
-	srcNode.hCost = nodedistance(srcNode,targetNode);
-	pq.emplace_back(&srcNode);					//push node into queue.
+	node *srcNode = &(graph.getNode(srcpos));
+	srcNode->gCost = 0;
+	node* targetNode = &(graph.getNode(targetpos));
+	srcNode->hCost = nodedistance(srcNode,targetNode);
+	pq.emplace_back(srcNode);					//push node into queue.
 
 
 	while (!pq.empty() && !targetreached) {		//while priority queue is not empty
 		pq.sort(fCostcomparator);
-		node* curr = pq.front();
+		node* curr = std::move(pq.front());
 		pq.pop_front();								//pop from queue.
-		graph.getNode(curr->nodeloc).Visited = true;
+		curr->Visited = true;
 		grid.ColourVisitedTile(curr->nodeloc);
 
 		if (curr->nodeloc == targetpos) {		//set target reached to true
@@ -42,28 +44,26 @@ void AStar::SolveAlgorithm(const Location & srcpos, const Location & targetpos, 
 		grid.drawGrid();
 		createwindow.display();
 
-		for (auto &neighbour : graph.getNode(curr->nodeloc).neighbours) {
+		std::this_thread::sleep_for(std::chrono::milliseconds(40));
 
-			if (graph.getNode(neighbour.nodeloc).Visited) {
+		for (auto &neighbour : curr->neighbours) {
+
+			if (neighbour->Visited || neighbour->isObstacle) {
 				continue;
 			}
 		
 			else {
-				double estimatedgCost = curr->gCost + nodedistance(*curr, neighbour);
-				if (estimatedgCost < graph.getNode(neighbour.nodeloc).gCost) {			//if estiamted gcost is lesser, means there is a more optimal path from origin to th neighbour
-					graph.getNode(neighbour.nodeloc).parent = &(graph.getNode(curr->nodeloc));
-					graph.getNode(neighbour.nodeloc).gCost = estimatedgCost;
-					graph.getNode(neighbour.nodeloc).hCost = nodedistance(neighbour, graph.getNode(targetpos));
-					graph.getNode(neighbour.nodeloc).fCost = graph.getNode(neighbour.nodeloc).gCost + graph.getNode(neighbour.nodeloc).hCost;
-					auto find = openSet.find(std::pair<int, int>(neighbour.nodeloc.posx, neighbour.nodeloc.posy));
-					if (find == openSet.end()) {
-						grid.ColourVisitingTile(neighbour.nodeloc);
-						std::cout << "not in open" << std::endl;
-						pq.emplace_back(&(graph.getNode(neighbour.nodeloc)));
-						openSet.insert(std::pair<int, int>(neighbour.nodeloc.posx, neighbour.nodeloc.posy));
-					}
-					else {
-						std::cout << "found pair " << std::endl;
+				double estimatedgCost = curr->gCost + nodedistance(curr, neighbour);
+				if (estimatedgCost < neighbour->gCost) {			//if estiamted gcost is lesser, means there is a more optimal path from origin to th neighbour
+					neighbour->parent = curr;
+					neighbour->gCost = estimatedgCost;
+					neighbour->hCost = nodedistance(neighbour, targetNode);
+					neighbour->fCost = neighbour->gCost + neighbour->hCost;
+					auto find = openSet.find(neighbour);
+					if (find == openSet.end()) {		//if NOT in set
+						grid.ColourVisitingTile(neighbour->nodeloc);
+						pq.emplace_back(neighbour);
+						openSet.insert(neighbour);
 					}
 				}
 			}
@@ -75,10 +75,9 @@ void AStar::SolveAlgorithm(const Location & srcpos, const Location & targetpos, 
 
 }
 
-double AStar::nodedistance(node& a, node& b)
+double AStar::nodedistance(node* a, node* b)
 {
-	int dx = (a.nodeloc.posx - b.nodeloc.posx);
-	int dy= (a.nodeloc.posy - b.nodeloc.posy);
-	return sqrt((dx * dx) + (dy * dy));			//sqrt(dx^2 - dy^2) for Euclidean
-		
+	int dx = (a->nodeloc.posx - b->nodeloc.posx);
+	int dy= (a->nodeloc.posy - b->nodeloc.posy);
+	return sqrt((dx * dx) + (dy * dy));			//sqrt(dx^2 - dy^2) for Euclidean	
 }

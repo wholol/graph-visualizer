@@ -18,11 +18,12 @@ private:
 	Location targetpos;
 	bool targetreached = false;
 	std::list<node*> pq;
-	std::set<std::pair<int , int>> openSet;
-	double nodedistance(node& a, node& b);
+	std::set<node*> openSet;
+	double nodedistance(node* a, node* b);
 	
 
 
 
 
 };
+

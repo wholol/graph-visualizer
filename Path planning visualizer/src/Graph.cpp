@@ -18,25 +18,25 @@ Graph::Graph(std::tuple<int,int> getNumTile)
 
 	for (int x = 0; x < totalXTiles; ++x) {
 		for (int y = 0; y < totalYTiles; ++y) {		
-
+			
 			if (y > 0)
-				nodes[x*totalXTiles + y].neighbours.emplace_back(x, y - 1);
+				nodes[x*totalXTiles + y].neighbours.emplace_back(&nodes[x*totalXTiles + (y - 1)]);
 			if (y < totalXTiles - 1)
-				nodes[x*totalXTiles + y].neighbours.emplace_back(x, y + 1);
+				nodes[x*totalXTiles + y].neighbours.emplace_back(&nodes[x*totalXTiles + (y + 1)]);
 			if (x > 0)
-				nodes[x*totalXTiles + y].neighbours.emplace_back(x - 1, y);
+				nodes[x*totalXTiles + y].neighbours.emplace_back(&nodes[(x - 1)*totalXTiles + y]);
 			if (x < totalXTiles - 1)
-				nodes[x*totalXTiles + y].neighbours.emplace_back(x + 1, y);
+				nodes[x*totalXTiles + y].neighbours.emplace_back(&nodes[(x + 1)*totalXTiles + y]);
 
 
-			if (y> 0 && x> 0)
-				nodes[x*totalXTiles + y].neighbours.emplace_back(x - 1, y - 1);
+			if (y > 0 && x > 0)
+				nodes[x*totalXTiles + y].neighbours.emplace_back(&nodes[(x - 1)*totalXTiles + (y - 1)]);
 			if (y < totalXTiles -1 && x > 0)
-				nodes[x*totalXTiles + y].neighbours.emplace_back(x - 1, y + 1);
+				nodes[x*totalXTiles + y].neighbours.emplace_back(&nodes[(x - 1)*totalXTiles + (y + 1)]);
 			if (y > 0 && x < totalXTiles -1)
-				nodes[x*totalXTiles + y].neighbours.emplace_back(x + 1, y - 1);
+				nodes[x*totalXTiles + y].neighbours.emplace_back(&nodes[(x + 1)*totalXTiles + (y - 1)]);
 			if (y< totalXTiles - 1 && x< totalXTiles -1)
-				nodes[x*totalXTiles + y].neighbours.emplace_back(x + 1, y + 1);
+				nodes[x*totalXTiles + y].neighbours.emplace_back(&nodes[(x + 1)*totalXTiles + (y + 1)]);
 
 			/*if (x == 0 && y == 0) {			//top leeft corner case
 				nodes[x * totalXTiles + y].neighbours.emplace_back(x + 1, y + 1);
