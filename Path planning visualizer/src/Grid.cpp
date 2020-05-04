@@ -197,9 +197,6 @@ void Grid::ColourPathTile(const Location& loc_1 , const Location& loc_2)
 {
 	vertices.push_back(sf::Vertex(sf::Vector2f(loc_1.posx * TileDimension + (TileDimension / 2), loc_1.posy * TileDimension + (TileDimension / 2))));
 	vertices.push_back(sf::Vertex(sf::Vector2f(loc_2.posx * TileDimension + (TileDimension / 2), loc_2.posy * TileDimension + (TileDimension / 2))));
-
-	//if (loc == srcpos || loc == targetpos) return;	//do not recolour target pos
-	//setTileColor(loc_1, pathTileColour);
 }
 
 std::vector<Location> Grid::getObstacleLocation() const

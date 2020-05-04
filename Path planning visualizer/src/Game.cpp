@@ -45,8 +45,8 @@ void Game::update() {		//update game
 		Location srcpos = grid.getSrcPos();
 		Location targetpos = grid.getTargetPos();
 		std::vector<Location> Obstacles = grid.getObstacleLocation();
-		aStar.SolveAlgorithm(srcpos,targetpos,Obstacles,grid,createwindow);
-		aStar.constructPath(grid);
+		bfs.SolveAlgorithm(srcpos,targetpos,Obstacles,grid,createwindow);
+		bfs.constructPath(grid);
 		solve = false;
 	}
 	createwindow.clear();

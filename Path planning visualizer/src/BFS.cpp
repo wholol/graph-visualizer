@@ -17,6 +17,7 @@ void BFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 
 	node* srcnode = &(graph.getNode(srcpos));
 	deque.emplace_back(srcnode);			//push into queue.
+	srcnode->Visited = true;
 
 	while (!deque.empty() && !targetreached) {
 
@@ -27,16 +28,17 @@ void BFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 		grid.drawGrid();
 		createwindow.display();
 
+		if (curr->nodeloc == targetpos) {
+			targetreached = true;
+		}
+
 		std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
 		for (auto &neighbour : curr->neighbours) {
 			
-			Location neighbourloc = neighbour->nodeloc;
-			if (neighbour->nodeloc == targetpos) {
-				targetreached = true;
-			}
+			
 
-			else if (!neighbour->Visited) {
+			 if (!neighbour->Visited) {
 				if (neighbour->isObstacle) {
 
 				}
@@ -45,7 +47,7 @@ void BFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 					neighbour->parent = curr;
 					deque.emplace_back(neighbour);
 					neighbour->Visited = true;
-					grid.ColourVisitingTile(neighbourloc);
+					grid.ColourVisitingTile(neighbour->nodeloc);
 				}
 			}
 		}

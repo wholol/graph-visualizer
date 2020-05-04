@@ -17,6 +17,7 @@ void DFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 
 	node* srcnode = &(graph.getNode(srcpos));
 	stack.push(srcnode);			//push into queue.
+	srcnode->Visited = true;
 
 	while (!stack.empty() && !targetreached) {				
 
@@ -26,6 +27,10 @@ void DFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 
 		grid.drawGrid();					
 		createwindow.display();
+
+		if (curr->nodeloc == targetpos) {
+			targetreached = true;
+		}
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(40));
 		
@@ -37,16 +42,15 @@ void DFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 				targetreached = true;
 			}
 
-			if (!neighbour->Visited){
-				if (neighbour->isObstacle) {
-					continue;
-				}
-				else {
-					neighbour->parent = curr;
-					stack.push(neighbour);
-					neighbour->Visited = true;
-					grid.ColourVisitingTile(neighbourloc);
-				}
+			if (neighbour->Visited || neighbour->isObstacle) {
+				continue;
+			}
+
+			else {
+				neighbour->parent = curr;
+				stack.push(neighbour);
+				neighbour->Visited = true;
+				grid.ColourVisitingTile(neighbourloc);
 			}
 		}
 	}
@@ -58,7 +62,7 @@ void DFS::constructPath(Grid& grid)
 {
 	node* traverse = &(graph.getNode(targetpos));
 	if (traverse != nullptr) {
-		while (traverse != nullptr) {
+		while (traverse->parent != nullptr) {
 			grid.ColourPathTile(traverse->nodeloc, traverse->parent->nodeloc);
 			traverse = traverse->parent;
 		}
