@@ -4,12 +4,13 @@
 #include <unordered_set>
 #include <list>
 
-class AStar {
+class Dijkstra {
+
 public:
-	AStar(Graph &graph);
+	Dijkstra(Graph &graph);
 	void SolveAlgorithm(const Location& srcpos, const Location& targetpos, const std::vector<Location>& obstacles, Grid &grid, sf::RenderWindow& createwindow);
 	void constructPath(Grid& grid);
-	
+
 private:
 	Graph &graph;
 	Location srcpos;
@@ -19,4 +20,3 @@ private:
 	std::unordered_set<node*> openSet;
 	double nodedistance(node* a, node* b);
 };
-

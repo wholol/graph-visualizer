@@ -5,6 +5,7 @@
 #include "DFS.h"
 #include "BFS.h"
 #include "AStar.h"
+#include "Dijkstra.h"
 
 class Game {			//game class. should have render, update/events, quit and initialize.
 
@@ -29,6 +30,7 @@ private:
 	DFS dfs;
 	BFS bfs;
 	AStar aStar;
+	Dijkstra dij;
 	sf::Mouse mouse;
 	sf::Event event;					//events class
 	sf::RenderWindow createwindow;		//windows class

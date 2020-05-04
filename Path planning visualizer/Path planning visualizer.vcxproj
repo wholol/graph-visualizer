@@ -168,6 +168,7 @@
     <ClCompile Include="src\AStar.cpp" />
     <ClCompile Include="src\BFS.cpp" />
     <ClCompile Include="src\DFS.cpp" />
+    <ClCompile Include="src\Dijkstra.cpp" />
     <ClCompile Include="src\Graph.cpp" />
     <ClCompile Include="src\Grid.cpp" />
     <ClCompile Include="src\Game.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="src\AStar.h" />
     <ClInclude Include="src\BFS.h" />
     <ClInclude Include="src\DFS.h" />
+    <ClInclude Include="src\Dijkstra.h" />
     <ClInclude Include="src\Graph.h" />
     <ClInclude Include="src\Grid.h" />
     <ClInclude Include="src\Game.h" />

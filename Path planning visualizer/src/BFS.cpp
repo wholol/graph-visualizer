@@ -35,9 +35,6 @@ void BFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 		std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
 		for (auto &neighbour : curr->neighbours) {
-			
-			
-
 			 if (!neighbour->Visited) {
 				if (neighbour->isObstacle) {
 
