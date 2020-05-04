@@ -41,6 +41,13 @@ void Grid::drawGrid()
 	}		//draw tiles
 }
 
+void Grid::drawPath()
+{
+	if (vertices.size() > 0) {
+		createwindow.draw(&vertices[0], vertices.size(), sf::Lines);
+	}
+}
+
 void Grid::setObstacle()
 {
 	int mouseposx = mouse.getPosition(createwindow).x;
@@ -174,22 +181,25 @@ void Grid::setSource()
 	}
 }
 
-void Grid::ColourVisitedTile(const Location & loc)
+void Grid::ColourVisitedTile(const Location& loc)
 {
 	if (loc == srcpos || loc == targetpos) return;	//do not recolour srcpos
 	setTileColor(loc, visitedTileColour);
 }
 
-void Grid::ColourVisitingTile(const Location & loc)
+void Grid::ColourVisitingTile(const Location& loc)
 {
 	if (loc == srcpos || loc == targetpos) return;	//do not recolour target pos
 	setTileColor(loc, visitngTileColour);
 }
 
-void Grid::ColourPathTile(const Location & loc)
+void Grid::ColourPathTile(const Location& loc_1 , const Location& loc_2)
 {
-	if (loc == srcpos || loc == targetpos) return;	//do not recolour target pos
-	setTileColor(loc, pathTileColour);
+	vertices.push_back(sf::Vertex(sf::Vector2f(loc_1.posx * TileDimension + (TileDimension / 2), loc_1.posy * TileDimension + (TileDimension / 2))));
+	vertices.push_back(sf::Vertex(sf::Vector2f(loc_2.posx * TileDimension + (TileDimension / 2), loc_2.posy * TileDimension + (TileDimension / 2))));
+
+	//if (loc == srcpos || loc == targetpos) return;	//do not recolour target pos
+	//setTileColor(loc_1, pathTileColour);
 }
 
 std::vector<Location> Grid::getObstacleLocation() const

@@ -2,7 +2,7 @@
 #include <iostream>
 #include <thread>
 
-AStar::AStar(Graph graph)
+AStar::AStar(Graph &graph)
 	:graph(graph)
 {
 
@@ -29,7 +29,6 @@ void AStar::SolveAlgorithm(const Location & srcpos, const Location & targetpos, 
 	srcNode->hCost = nodedistance(srcNode,targetNode);
 	pq.emplace_back(srcNode);					//push node into queue.
 
-
 	while (!pq.empty() && !targetreached) {		//while priority queue is not empty
 		pq.sort(fCostcomparator);
 		node* curr = std::move(pq.front());
@@ -40,7 +39,7 @@ void AStar::SolveAlgorithm(const Location & srcpos, const Location & targetpos, 
 		if (curr->nodeloc == targetpos) {		//set target reached to true
 			targetreached = true;
 		}
-
+		
 		grid.drawGrid();
 		createwindow.display();
 
@@ -67,12 +66,20 @@ void AStar::SolveAlgorithm(const Location & srcpos, const Location & targetpos, 
 					}
 				}
 			}
-			
 		}
 
 	}
+}
 
-
+void AStar::constructPath(Grid& grid)
+{
+	node* traverse = &graph.getNode(targetpos);
+	if (traverse != nullptr) {
+		while (traverse->parent != nullptr) {
+			grid.ColourPathTile(traverse->nodeloc, traverse->parent->nodeloc);
+			traverse = traverse->parent;
+		}
+	}
 }
 
 double AStar::nodedistance(node* a, node* b)

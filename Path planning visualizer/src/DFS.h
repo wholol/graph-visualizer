@@ -6,12 +6,14 @@
 class DFS {
 
 public:
-	DFS(Graph graph);
+	DFS(Graph& graph);
 	void SolveAlgorithm(const Location& srcpos, const Location& targetpos,const std::vector<Location>& obstacles,Grid &grid,sf::RenderWindow& createwindow);
-	void drawpath(Grid& grid);
+	void constructPath(Grid& grid);
 
 private:
-	Graph graph;
+	Graph& graph;
+	Location srcpos;
+	Location targetpos;
 	std::stack<node*> stack;
 	bool targetreached = false;
 };

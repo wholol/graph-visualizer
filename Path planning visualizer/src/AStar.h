@@ -1,24 +1,23 @@
 #pragma once
 #include "Graph.h"
 #include "Grid.h"
-#include <set>
+#include <unordered_set>
 #include <list>
 
 class AStar {
 
 public:
-	AStar(Graph graph);
+	AStar(Graph &graph);
 	void SolveAlgorithm(const Location& srcpos, const Location& targetpos, const std::vector<Location>& obstacles, Grid &grid, sf::RenderWindow& createwindow);
-	//void drawpath(Grid& grid);
+	void constructPath(Grid& grid);
 	
-
 private:
-	Graph graph;
+	Graph &graph;
 	Location srcpos;
 	Location targetpos;
 	bool targetreached = false;
 	std::list<node*> pq;
-	std::set<node*> openSet;
+	std::unordered_set<node*> openSet;
 	double nodedistance(node* a, node* b);
 	
 

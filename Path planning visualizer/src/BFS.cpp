@@ -2,7 +2,7 @@
 #include <iostream>
 #include <thread>
 
-BFS::BFS(Graph graph)
+BFS::BFS(Graph &graph)
 	:graph(graph)
 {}
 
@@ -11,6 +11,9 @@ void BFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 	for (const auto& obs : obstacles) {	//set obstacles
 		graph.getNode(obs).isObstacle = true;
 	}
+
+	this->targetpos = targetpos;
+	this->srcpos = srcpos;
 
 	node* srcnode = &(graph.getNode(srcpos));
 	deque.emplace_back(srcnode);			//push into queue.
@@ -24,9 +27,10 @@ void BFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 		grid.drawGrid();
 		createwindow.display();
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(40));
+		std::this_thread::sleep_for(std::chrono::milliseconds(10));
 
 		for (auto &neighbour : curr->neighbours) {
+			
 			Location neighbourloc = neighbour->nodeloc;
 			if (neighbour->nodeloc == targetpos) {
 				targetreached = true;
@@ -38,6 +42,7 @@ void BFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 				}
 
 				else {
+					neighbour->parent = curr;
 					deque.emplace_back(neighbour);
 					neighbour->Visited = true;
 					grid.ColourVisitingTile(neighbourloc);
@@ -48,13 +53,15 @@ void BFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 
 	return;
 }
-/*
-void BFS::drawpath(Grid& grid)
+
+void BFS::constructPath(Grid& grid)
 {
-	node* traverse = graph.getNode(targetpos).parent;
-	while (traverse != nullptr) {
-		grid.ColourPathTile(traverse->nodeloc);
-		traverse = traverse->parent;
+	node* traverse = &(graph.getNode(targetpos));
+
+	if (traverse != nullptr) {
+		while (traverse->parent != nullptr) {
+			grid.ColourPathTile(traverse->nodeloc, traverse->parent->nodeloc);
+			traverse = traverse->parent;
+		}
 	}
 }
-*/

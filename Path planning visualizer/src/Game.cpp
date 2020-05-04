@@ -14,7 +14,8 @@ Game::Game(int screenwidth, int screenheight, const std::string& title, int fram
 
 void Game::render() {		//rendering
 
-	grid.drawGrid();		
+	grid.drawGrid();	
+	grid.drawPath();
 	createwindow.display();
 }
 
@@ -45,11 +46,10 @@ void Game::update() {		//update game
 		Location targetpos = grid.getTargetPos();
 		std::vector<Location> Obstacles = grid.getObstacleLocation();
 		aStar.SolveAlgorithm(srcpos,targetpos,Obstacles,grid,createwindow);
+		aStar.constructPath(grid);
 		solve = false;
 	}
-
 	createwindow.clear();
-
 }
 
 

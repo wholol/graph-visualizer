@@ -12,7 +12,7 @@ struct node {
 	bool isObstacle = false;	//is the node an obstacle?
 	double hCost = INFINITY;				//heuristics for node (distance from current node to target).
 	double gCost = INFINITY;				//heuristics for node (distance from start to curent node).
-	double fCost;
+	double fCost;						//fCost
 	std::vector<node*> neighbours;			//store the vector of neigghbours for the node
 };
 

@@ -2,7 +2,7 @@
 #include <iostream>
 #include <thread>
 
-DFS::DFS(Graph graph)
+DFS::DFS(Graph& graph)
 	:graph(graph)
 {}
 
@@ -11,6 +11,9 @@ void DFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 	for (const auto& obs : obstacles) {	//set obstacles
 		graph.getNode(obs).isObstacle = true;
 	}
+
+	this->targetpos = targetpos;
+	this->srcpos = srcpos;
 
 	node* srcnode = &(graph.getNode(srcpos));
 	stack.push(srcnode);			//push into queue.
@@ -39,6 +42,7 @@ void DFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 					continue;
 				}
 				else {
+					neighbour->parent = curr;
 					stack.push(neighbour);
 					neighbour->Visited = true;
 					grid.ColourVisitingTile(neighbourloc);
@@ -49,13 +53,14 @@ void DFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 
 	return;
 }
-/*
-void DFS::drawpath(Grid& grid)
+
+void DFS::constructPath(Grid& grid)
 {
-	node* traverse = graph.getNode(targetpos).parent;
-	while (traverse != nullptr) {
-		grid.ColourPathTile(traverse->nodeloc);
-		traverse = traverse->parent;
+	node* traverse = &(graph.getNode(targetpos));
+	if (traverse != nullptr) {
+		while (traverse != nullptr) {
+			grid.ColourPathTile(traverse->nodeloc, traverse->parent->nodeloc);
+			traverse = traverse->parent;
+		}
 	}
 }
-*/
