@@ -4,4 +4,9 @@
 ## Algorithms  
 ### A* algorithm  
 <img src="images/AStar.png">  
-BFS,DFS and dijsktra as well.
+  
+### Breadth First Search (BFS)  
+<img src="images/BFS.png">  
+  
+### Depth First Search (DFS)  
+<img src="images/DFS.png">  
