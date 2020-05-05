@@ -14,6 +14,9 @@
 ### Depth First Search (DFS)  
 <img src="images/DFS.png"  width="450" height="450">   
   
+### Bi-Directional Depth First Search (biDFS)  
+<img src="images/diDFS.png"  width="450" height="450">  
+  
 ### Dijkstra's Algorithm   
 <img src="images/dijkstra.png"  width="450" height="450">   
   
