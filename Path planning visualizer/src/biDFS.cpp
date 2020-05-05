@@ -1,11 +1,11 @@
-#include "BiBFS.h"
-#include <thread>
+#include "biDFS.h"
 
-biBFS::biBFS(Graph & graph)
+biDFS::biDFS(Graph & graph)
 	:graph(graph)
-{}
+{
+}
 
-void biBFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, const std::vector<Location>& obstacles, Grid& grid, sf::RenderWindow& createwindow)
+void biDFS::SolveAlgorithm(const Location & srcpos, const Location & targetpos, const std::vector<Location>& obstacles, Grid & grid, sf::RenderWindow & createwindow)
 {
 	for (const auto& obs : obstacles) {	//set obstacles
 		graph.getNode(obs).isObstacle = true;
@@ -16,16 +16,16 @@ void biBFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, co
 
 	node* srcnode = &(graph.getNode(srcpos));
 	node* targetnode = &(graph.getNode(targetpos));
-	srcStack.emplace_back(srcnode);			//push into queue.
+	srcStack.push(srcnode);			//push into queue.
 	srcnode->Visited = true;
-	targetStack.emplace_back(targetnode);			//push into queue.
+	targetStack.push(targetnode);			//push into queue.
 	targetnode->Visited = true;
 
 	while (!srcStack.empty() && !targetStack.empty() && !intersect) {
 
 		if (!srcStack.empty()) {
-			node* srccurr = std::move(srcStack.front());		//get the current location
-			srcStack.pop_front();
+			node* srccurr = std::move(srcStack.top());		//get the current location
+			srcStack.pop();
 			
 			grid.ColourVisitedTile(srccurr->nodeloc);
 			grid.drawGrid();
@@ -38,7 +38,7 @@ void biBFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, co
 					}
 					else {
 						neighbour->parent = srccurr;
-						srcStack.emplace_back(neighbour);
+						srcStack.push(neighbour);
 						neighbour->Visited = true;
 						srcSet.insert(srccurr);
 						grid.ColourVisitingTile(neighbour->nodeloc);
@@ -47,7 +47,7 @@ void biBFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, co
 				else {		//if visited
 					auto findFromSrc = targetSet.find(neighbour); //check if neighbour is in the target set
 					if (findFromSrc != targetSet.end()) {			//if the crrent node from soucre is found in tRget set
-						grid.ColourVisitedTile(neighbour->nodeloc);		
+						grid.ColourVisitedTile(neighbour->nodeloc);
 						intersectnode = neighbour;
 						otherparent = srccurr;
 						intersect = true;
@@ -57,8 +57,8 @@ void biBFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, co
 		}
 
 		if (!targetStack.empty()) {
-			node* targetcurr = std::move(targetStack.front());	//get the current location
-			targetStack.pop_front();
+			node* targetcurr = std::move(targetStack.top());	//get the current location
+			targetStack.pop();
 			
 			grid.ColourVisitedTile(targetcurr->nodeloc);		//colour current location
 			grid.drawGrid();
@@ -72,7 +72,7 @@ void biBFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, co
 
 					else {
 						neighbour->parent = targetcurr;
-						targetStack.emplace_back(neighbour);
+						targetStack.push(neighbour);
 						neighbour->Visited = true;
 						targetSet.insert(neighbour);
 						grid.ColourVisitingTile(neighbour->nodeloc);		//(in queue)
@@ -94,21 +94,19 @@ void biBFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, co
 	return;
 }
 
-void biBFS::constructPath(Grid & grid)
+void biDFS::constructPath(Grid & grid)
 {
 	node* traverse = intersectnode;			//get the interesection node
-		while (traverse->parent != nullptr) {
-			grid.ColourPathTile(traverse->nodeloc, traverse->parent->nodeloc);
-			traverse = traverse->parent;
-		}
+	while (traverse->parent != nullptr) {
+		grid.ColourPathTile(traverse->nodeloc, traverse->parent->nodeloc);
+		traverse = traverse->parent;
+	}
 
-		intersectnode->parent = otherparent;
-		traverse = intersectnode;
-		
-		while (traverse->parent != nullptr) {
-			grid.ColourPathTile(traverse->nodeloc, traverse->parent->nodeloc);
-			traverse = traverse->parent;
-		}
+	intersectnode->parent = otherparent;
+	traverse = intersectnode;
 
+	while (traverse->parent != nullptr) {
+		grid.ColourPathTile(traverse->nodeloc, traverse->parent->nodeloc);
+		traverse = traverse->parent;
+	}
 }
-
