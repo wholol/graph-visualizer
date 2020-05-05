@@ -2,11 +2,11 @@
 #include "Graph.h"
 #include "Grid.h"
 #include <deque>
-
-class BFS {
+#include <unordered_set>
+class biBFS {
 
 public:
-	BFS(Graph &graph);
+	biBFS(Graph &graph);
 	void SolveAlgorithm(const Location& srcpos, const Location& targetpos, const std::vector<Location>& obstacles, Grid &grid, sf::RenderWindow& createwindow);
 	void constructPath(Grid& grid);
 
@@ -14,6 +14,11 @@ private:
 	Graph &graph;
 	Location srcpos;
 	Location targetpos;
-	std::deque<node*> deque;
-	bool targetreached = false;
+	node* intersectnode;
+	node* otherparent;
+	std::deque<node*> srcDeque;
+	std::deque<node*> targetDeque;
+	std::unordered_set<node*> srcSet;
+	std::unordered_set<node*> targetSet;
+	bool intersect = false;
 };

@@ -6,6 +6,7 @@
 #include "BFS.h"
 #include "AStar.h"
 #include "Dijkstra.h"
+#include "BiBFS.h"
 
 class Game {			//game class. should have render, update/events, quit and initialize.
 
@@ -31,6 +32,7 @@ private:
 	BFS bfs;
 	AStar aStar;
 	Dijkstra dij;
+	biBFS biBFS;
 	sf::Mouse mouse;
 	sf::Event event;					//events class
 	sf::RenderWindow createwindow;		//windows class

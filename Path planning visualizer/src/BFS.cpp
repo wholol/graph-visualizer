@@ -49,7 +49,6 @@ void BFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 			}
 		}
 	}
-
 	return;
 }
 
