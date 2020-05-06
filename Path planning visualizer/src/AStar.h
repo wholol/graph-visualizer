@@ -1,14 +1,15 @@
 #pragma once
+#include "Algorithm.h"
 #include "Graph.h"
 #include "Grid.h"
 #include <unordered_set>
 #include <list>
 
-class AStar {
+class AStar : public Algorithm {
 public:
 	AStar(Graph &graph);
-	void SolveAlgorithm(const Location& srcpos, const Location& targetpos, const std::vector<Location>& obstacles, Grid &grid, sf::RenderWindow& createwindow);
-	void constructPath(Grid& grid);
+	void SolveAlgorithm(const Location& srcpos, const Location& targetpos, const std::vector<Location>& obstacles, Grid &grid, sf::RenderWindow& createwindow) override;
+	void constructPath(Grid& grid) override;
 	
 private:
 	Graph &graph;

@@ -14,6 +14,7 @@ public:
 	void ColourVisitedTile(const Location& loc);
 	void ColourVisitingTile(const Location& loc);
 	void ColourPathTile(const Location& loc_1, const Location& loc_2);
+	void resetGrid();			//reset grid to default state
 	std::vector<Location> getObstacleLocation() const;
 	std::tuple<int, int> getTileNums() const;
 	Location getTargetPos() const;

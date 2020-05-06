@@ -177,6 +177,8 @@
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Algorithm.h" />
+    <ClInclude Include="src\AlgorithmFactory.h" />
     <ClInclude Include="src\AStar.h" />
     <ClInclude Include="src\BFS.h" />
     <ClInclude Include="src\BiBFS.h" />

@@ -1,15 +1,16 @@
 #pragma once
+#include "Algorithm.h"
 #include "Graph.h"
 #include "Grid.h"
 #include <unordered_set>
 #include <list>
 
-class Dijkstra {
+class Dijkstra : public Algorithm {
 
 public:
 	Dijkstra(Graph &graph);
-	void SolveAlgorithm(const Location& srcpos, const Location& targetpos, const std::vector<Location>& obstacles, Grid &grid, sf::RenderWindow& createwindow);
-	void constructPath(Grid& grid);
+	virtual void SolveAlgorithm(const Location& srcpos, const Location& targetpos, const std::vector<Location>& obstacles, Grid &grid, sf::RenderWindow& createwindow) override;
+	virtual void constructPath(Grid& grid) override;
 
 private:
 	Graph &graph;

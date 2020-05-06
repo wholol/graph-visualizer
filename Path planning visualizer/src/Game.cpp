@@ -5,14 +5,9 @@
 Game::Game(int screenwidth, int screenheight, const std::string& title, int framerate)
 	:createwindow(sf::VideoMode(screenwidth, screenheight), title),
 	grid(screenwidth,screenheight,mouse,createwindow),
-	graph(grid.getTileNums()),
-	dfs(graph),
-	bfs(graph),
-	aStar(graph),
-	dij(graph),
-	bibfs(graph),
-	bidfs(graph)
-{}
+	graph(grid.getTileNums())
+{
+}
 
 
 void Game::render() {		//rendering
@@ -26,8 +21,47 @@ void Game::main_menu()
 
 }
 
-void Game::update() {		//update game 
+void Game::update() {											//update game 
 
+	if (!solve) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
+			grid.resetGrid();
+			graph.resetGraph();
+			graphtype = "BFS";
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+			grid.resetGrid();
+			graph.resetGraph();
+			graphtype = "DFS";
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)) {
+			grid.resetGrid();
+			graph.resetGraph();
+			graphtype = "Dijkstra";
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::R)) {
+			grid.resetGrid();
+			graph.resetGraph();
+			graphtype = "AStar";
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::T)) {
+			grid.resetGrid();
+			graph.resetGraph();
+			graphtype = "biBFS";
+		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Y)) {
+			grid.resetGrid();
+			graph.resetGraph();
+			graphtype = "biDFS";
+		}
+		algo = std::move(algofactory.generateAlgorithm(graphtype, graph));
+	
+	}
 	
 	std::this_thread::sleep_for(std::chrono::milliseconds(50));
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {			//sets up obstacles for the grid.
@@ -39,7 +73,7 @@ void Game::update() {		//update game
 		grid.setTarget();
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+	if (algo != nullptr && sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
 		solve = true;
 	}
 
@@ -47,10 +81,11 @@ void Game::update() {		//update game
 		Location srcpos = grid.getSrcPos();
 		Location targetpos = grid.getTargetPos();
 		std::vector<Location> Obstacles = grid.getObstacleLocation();
-		bidfs.SolveAlgorithm(srcpos,targetpos,Obstacles,grid,createwindow);
-		bidfs.constructPath(grid);
+		algo->SolveAlgorithm(srcpos,targetpos,Obstacles,grid,createwindow);
+		algo->constructPath(grid);
 		solve = false;
 	}
+	
 	createwindow.clear();
 }
 

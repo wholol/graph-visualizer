@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML\Graphics.hpp>
+#include "Algorithm.h"
 #include "Grid.h"
 #include "Graph.h"
 #include "DFS.h"
@@ -8,6 +9,8 @@
 #include "Dijkstra.h"
 #include "BiBFS.h"
 #include "biDFS.h"
+#include "AlgorithmFactory.h"
+#include "AlgorithmFactory.h"
 
 class Game {			//game class. should have render, update/events, quit and initialize.
 
@@ -27,14 +30,11 @@ public:
 private:
 	bool quitgame = false;			//quit game
 	bool MainMenu = true;
+	std::unique_ptr<Algorithm> algo;
+	AlgorithmFactory algofactory;
 	Grid grid;
 	Graph graph;
-	DFS dfs;
-	BFS bfs;
-	AStar aStar;
-	Dijkstra dij;
-	biBFS bibfs;
-	biDFS bidfs;
+	std::string graphtype;
 	sf::Mouse mouse;
 	sf::Event event;					//events class
 	sf::RenderWindow createwindow;		//windows class

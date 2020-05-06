@@ -1,4 +1,5 @@
 #include "biDFS.h"
+#include <thread>
 
 biDFS::biDFS(Graph & graph)
 	:graph(graph)

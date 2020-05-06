@@ -77,5 +77,11 @@
     <ClInclude Include="src\biDFS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Algorithm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AlgorithmFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

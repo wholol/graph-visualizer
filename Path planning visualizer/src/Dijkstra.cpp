@@ -39,12 +39,12 @@ void Dijkstra::SolveAlgorithm(const Location & srcpos, const Location & targetpo
 		grid.drawGrid();
 		createwindow.display();
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(40));
+		std::this_thread::sleep_for(std::chrono::milliseconds(20));
 
 		for (auto &neighbour : curr->neighbours) {
 
 			if (neighbour->Visited || neighbour->isObstacle) {
-				continue;
+				continue;	//if visited, it means it has been popped from the prio queue (already the possible shortest vertex).
 			}
 
 			else {
@@ -53,7 +53,7 @@ void Dijkstra::SolveAlgorithm(const Location & srcpos, const Location & targetpo
 					neighbour->parent = curr;
 					neighbour->gCost = estimatedgCost;
 					auto find = openSet.find(neighbour);
-					if (find == openSet.end()) {		//if NOT in set
+					if (find == openSet.end()) {		//set is used to check if it is in the priority queue
 						grid.ColourVisitingTile(neighbour->nodeloc);
 						pq.emplace_back(neighbour);
 						openSet.insert(neighbour);
@@ -62,6 +62,7 @@ void Dijkstra::SolveAlgorithm(const Location & srcpos, const Location & targetpo
 			}
 		}
 	}
+	return;
 }
 
 void Dijkstra::constructPath(Grid& grid)

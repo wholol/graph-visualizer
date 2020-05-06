@@ -27,4 +27,5 @@ private:
 public:
 	Graph(std::tuple<int,int> getNumTiles);		//construct the graph
 	node& getNode(const Location& loc);
+	void resetGraph();
 };

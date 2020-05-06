@@ -40,7 +40,7 @@ void AStar::SolveAlgorithm(const Location & srcpos, const Location & targetpos, 
 		grid.drawGrid();
 		createwindow.display();
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(40));
+		std::this_thread::sleep_for(std::chrono::milliseconds(20));
 
 		for (auto &neighbour : curr->neighbours) {
 

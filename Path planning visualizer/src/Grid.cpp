@@ -32,6 +32,7 @@ Grid::Grid(int screenwidth, int screenheight, const sf::Mouse& mouse, sf::Render
 	/* colour src and target pos*/
 	TileMap[srcpos.posx * NumTilesX + srcpos.posy].setFillColor(srcTileColour);
 	TileMap[targetpos.posx * NumTilesX + targetpos.posy].setFillColor(targetTileColour);
+
 }
 
 void Grid::drawGrid()
@@ -197,6 +198,18 @@ void Grid::ColourPathTile(const Location& loc_1 , const Location& loc_2)
 {
 	vertices.push_back(sf::Vertex(sf::Vector2f(loc_1.posx * TileDimension + (TileDimension / 2), loc_1.posy * TileDimension + (TileDimension / 2))));
 	vertices.push_back(sf::Vertex(sf::Vector2f(loc_2.posx * TileDimension + (TileDimension / 2), loc_2.posy * TileDimension + (TileDimension / 2))));
+}
+
+void Grid::resetGrid()
+{
+	for (auto& tile : TileMap) {
+		tile.setFillColor(openTileColour);
+	}
+
+	setTileColor(srcpos, srcTileColour);
+	setTileColor(targetpos, targetTileColour);
+	vertices.clear();
+
 }
 
 std::vector<Location> Grid::getObstacleLocation() const
