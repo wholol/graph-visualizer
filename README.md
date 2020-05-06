@@ -24,6 +24,7 @@ An Euclidean distance grid based Path planning Visualizer for basic graph algori
 <img src="images/dijkstra.png"  width="450" height="450">   
   
 ## Instructions on using the Program
+Visual Studio 2017 is used. To use the program, download the repository file and open/run the solution (.sln) file.  
 #### 1. choose an algorithm first
 to change the positions of the target and source, as well as adding obstacles, an algoirhtm must be chosen first.  
 to choose BFS, press Q.  
