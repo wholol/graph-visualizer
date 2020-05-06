@@ -9,7 +9,7 @@
 
 class AlgorithmFactory {
 public:
-	std::unique_ptr<Algorithm> generateAlgorithm(const std::string& graphtype ,Graph& graph) {
+	std::unique_ptr<Algorithm> generateAlgorithm(const std::string_view& graphtype ,Graph& graph) {
 		if (graphtype == "BFS") {
 			return std::make_unique<BFS>(graph);
 		}

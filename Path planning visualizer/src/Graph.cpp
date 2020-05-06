@@ -5,8 +5,7 @@
 
 Graph::Graph(std::tuple<int,int> getNumTile)
 {
-	 totalXTiles = std::get<0>(getNumTile);
-	 totalYTiles = std::get<1>(getNumTile);
+	auto[totalXTiles, totalYTiles] = getNumTile;
 
 	for (int i = 0; i < totalXTiles; ++i) {
 		for (int j = 0; j < totalYTiles; ++j) {
