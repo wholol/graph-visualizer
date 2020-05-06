@@ -25,20 +25,20 @@ An Euclidean distance grid based Path planning Visualizer for basic graph algori
   
 ## Instructions on using the Program
 Visual Studio 2017 is used. To use the program, download the repository file and open/run the solution (.sln) file.  
-#### 1. choose an algorithm first
-to change the positions of the target and source, as well as adding obstacles, an algoirhtm must be chosen first.  
-to choose BFS, press Q.  
-to choose DFS, press W.  
-to choose dijsktra, press E.  
-to choose A*, press R.  
-to choose bidirectional BFS, press T.  
-to choose bidirectional DFS, press Y.  
+#### 1. Shoose an algorithm first
+To change the positions of the target and source, as well as adding obstacles, an algoirhtm must be chosen first.  
+To choose BFS, press Q.  
+To choose DFS, press W.  
+To choose dijsktra, press E.  
+To choose A*, press R.  
+To choose bidirectional BFS, press T.  
+To choose bidirectional DFS, press Y.  
   
 #### 2. Change source and target positions, add/remove obstacles  
-to add and remove obstacles, right click on white coloured grids.
-to change source and target positions, left click of the source/target, and hit enter on the grid that you want to put it on.  
+To add and remove obstacles, right click on white coloured grids.
+To change source and target positions, left click of the source/target, and hit enter on the grid that you want to put it on.  
    
-#### 3. solving    
+#### 3. Solving    
 press spacebar.   
   
 #### 4. After solving  
