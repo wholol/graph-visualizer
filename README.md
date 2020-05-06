@@ -1,7 +1,8 @@
 # Path-planning-visualizer
 An Euclidean distance grid based Path planning Visualizer for basic graph algorithms!
- 
-## Algorithms  
+<img src="images/astar begin.png" width="400" height="400">    <img src="images/astar solving.png" width="400" height="400">  
+  
+## Algorithms Involved   
 ### A* algorithm  
 <img src="images/AStar.png" width="450" height="450">  
   
@@ -15,7 +16,7 @@ An Euclidean distance grid based Path planning Visualizer for basic graph algori
 <img src="images/DFS.png"  width="450" height="450">   
   
 ### Bi-Directional Depth First Search (biDFS)  
-<img src="images/diDFS.png"  width="450" height="450">  
+<img src="images/biDFS.png"  width="450" height="450">  
   
 ### Dijkstra's Algorithm   
 <img src="images/dijkstra.png"  width="450" height="450">   
