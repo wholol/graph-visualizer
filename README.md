@@ -8,6 +8,9 @@ An Euclidean distance grid based Path planning Visualizer for basic graph algori
 ### A* algorithm  
 <img src="images/AStar.png" width="450" height="450">  
   
+### Dijkstra's Algorithm   
+<img src="images/dijkstra.png"  width="450" height="450">   
+  
 ### Breadth First Search (BFS)  
 <img src="images/BFS.png"  width="450" height="450">  
   
@@ -20,8 +23,8 @@ An Euclidean distance grid based Path planning Visualizer for basic graph algori
 ### Bi-Directional Depth First Search (biDFS)  
 <img src="images/biDFS.png"  width="450" height="450">  
   
-### Dijkstra's Algorithm   
-<img src="images/dijkstra.png"  width="450" height="450">   
+### Best First Search 
+<img src="images/bestfs.png"  width="450" height="450">   
   
 ## Instructions on using the Program
 Visual Studio 2017 is used. To use the program, download the repository file and open/run the solution (.sln) file.  
@@ -33,6 +36,7 @@ To choose dijsktra, press E.
 To choose A*, press R.  
 To choose bidirectional BFS, press T.  
 To choose bidirectional DFS, press Y.  
+To choose Best First Search, press U.  
   
 #### 2. Change source and target positions, add/remove obstacles  
 To add and remove obstacles, right click on white coloured grids.
