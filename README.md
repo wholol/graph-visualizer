@@ -1,5 +1,5 @@
 # Path-planning-visualizer
-(WIP) Path planning Visualizer for basic graph algorithms!
+Path planning Visualizer for basic graph algorithms!
  
 ## Algorithms  
 ### A* algorithm  
