@@ -17,6 +17,8 @@ private:
 	Location targetpos;
 	node* intersectnode;
 	node* otherparent;
+	sf::Text text;
+	sf::Font font;
 	std::deque<node*> srcStack;
 	std::deque<node*> targetStack;
 	std::unordered_set<node*> srcSet;

@@ -21,7 +21,6 @@ public:
 	Game(Game &&other) = delete;						//no moving game object
 	~Game();
 
-	void main_menu();
 	void update();					//update logic
 	void render();					//rende r
 	bool quit();					//quit the window
@@ -29,16 +28,16 @@ public:
 
 private:
 	bool quitgame = false;			//quit game
-	bool MainMenu = true;
 	std::unique_ptr<Algorithm> algo;
 	AlgorithmFactory algofactory;
 	Grid grid;
 	Graph graph;
-	std::string graphtype;
+	sf::Text text;
+	sf::Font font;
+	std::string graphtype = "no algorithm chosen. Choose algorithm to add obstacles and change target and source positions.";
 	sf::Mouse mouse;
 	sf::Event event;					//events class
 	sf::RenderWindow createwindow;		//windows class
-	bool GameOver = false;				//gameover boolean
 	bool solve = false;
 
 

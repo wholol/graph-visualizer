@@ -13,6 +13,8 @@ public:
 
 private:
 	Graph &graph;
+	sf::Text text;
+	sf::Font font;
 	Location srcpos;
 	Location targetpos;
 	std::deque<node*> deque;

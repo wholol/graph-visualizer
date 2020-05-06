@@ -15,6 +15,8 @@ private:
 	Graph& graph;
 	Location srcpos;
 	Location targetpos;
+	sf::Text text;
+	sf::Font font;
 	std::stack<node*> stack;
 	bool targetreached = false;
 };

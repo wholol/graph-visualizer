@@ -27,7 +27,7 @@ private:
 	const sf::Mouse& mouse;
 	sf::RenderWindow& createwindow;
 	
-	static constexpr int TileDimension = 50;		//dimension of tile
+	static constexpr int TileDimension = 30;		//dimension of tile
 	static constexpr int OutlineThickness = 2;
 	
 	const int screenwidth;

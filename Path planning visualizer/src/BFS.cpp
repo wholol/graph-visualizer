@@ -4,7 +4,16 @@
 
 BFS::BFS(Graph &graph)
 	:graph(graph)
-{}
+{
+	if (!font.loadFromFile("fonts/Bebas-Regular.ttf")) {}
+	text.setFont(font);
+	text.setString("Solving BFS..");
+	text.setPosition(sf::Vector2f(5, 0));
+	text.setFillColor(sf::Color::Green);
+	text.setOutlineColor(sf::Color::Black);
+	text.setOutlineThickness(2);
+	text.setCharacterSize(25);
+}
 
 void BFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, const std::vector<Location>& obstacles, Grid &grid, sf::RenderWindow& createwindow)
 {
@@ -26,6 +35,7 @@ void BFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 		grid.ColourVisitedTile(curr->nodeloc);		//colour current location
 
 		grid.drawGrid();
+		createwindow.draw(text);
 		createwindow.display();
 
 		if (curr->nodeloc == targetpos) {

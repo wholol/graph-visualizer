@@ -203,7 +203,11 @@ void Grid::ColourPathTile(const Location& loc_1 , const Location& loc_2)
 void Grid::resetGrid()
 {
 	for (auto& tile : TileMap) {
+		if (tile.getFillColor() == obstacleTileColour) {
+			continue;
+		}
 		tile.setFillColor(openTileColour);
+		
 	}
 
 	setTileColor(srcpos, srcTileColour);
@@ -256,7 +260,7 @@ void Grid::setTileColor(const Location& loc ,const sf::Color& color)
 
 bool Grid::outofBounds(int x, int y)
 {
-	if (x < 0 || y < 0 || x > screenwidth || y > screenheight) {		//bound check
+	if (x < 0 || y < 0 || x >= screenwidth || y >= screenheight) {		//bound check
 		return true;
 	}
 	return false;

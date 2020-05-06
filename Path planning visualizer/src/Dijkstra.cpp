@@ -4,7 +4,16 @@
 
 Dijkstra::Dijkstra(Graph &graph)
 	:graph(graph)
-{}
+{
+	if (!font.loadFromFile("fonts/Bebas-Regular.ttf")) {}
+	text.setFont(font);
+	text.setString("Solving biDFS..");
+	text.setPosition(sf::Vector2f(5, 0));
+	text.setFillColor(sf::Color::Green);
+	text.setOutlineColor(sf::Color::Black);
+	text.setOutlineThickness(2);
+	text.setCharacterSize(25);
+}
 
 void Dijkstra::SolveAlgorithm(const Location & srcpos, const Location & targetpos, const std::vector<Location>& obstacles, Grid & grid, sf::RenderWindow & createwindow)
 {
@@ -37,6 +46,7 @@ void Dijkstra::SolveAlgorithm(const Location & srcpos, const Location & targetpo
 		}
 
 		grid.drawGrid();
+		createwindow.draw(text);
 		createwindow.display();
 
 		std::this_thread::sleep_for(std::chrono::milliseconds(20));

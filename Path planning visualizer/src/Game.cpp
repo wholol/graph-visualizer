@@ -7,18 +7,22 @@ Game::Game(int screenwidth, int screenheight, const std::string& title, int fram
 	grid(screenwidth,screenheight,mouse,createwindow),
 	graph(grid.getTileNums())
 {
+	if (!font.loadFromFile("fonts/Bebas-Regular.ttf")) { }
+	text.setFont(font);
+	text.setString(graphtype);
+	text.setPosition(sf::Vector2f(5, 0));
+	text.setFillColor(sf::Color::Green);
+	text.setOutlineColor(sf::Color::Black);
+	text.setOutlineThickness(2);
+	text.setCharacterSize(25);
 }
 
 
 void Game::render() {		//rendering
 	grid.drawGrid();	
 	grid.drawPath();
+	createwindow.draw(text);
 	createwindow.display();
-}
-
-void Game::main_menu()
-{
-
 }
 
 void Game::update() {											//update game 
@@ -60,21 +64,24 @@ void Game::update() {											//update game
 			graphtype = "biDFS";
 		}
 		algo = std::move(algofactory.generateAlgorithm(graphtype, graph));
-	
+		text.setString(graphtype);
 	}
-	
+
 	std::this_thread::sleep_for(std::chrono::milliseconds(50));
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {			//sets up obstacles for the grid.
-		grid.setObstacle();
-	}
+	if (algo != nullptr) {
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {			//sets up obstacles for the grid.
+			grid.setObstacle();
+			std::this_thread::sleep_for(std::chrono::milliseconds(30));
+		}
 
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {			//sets up obstacles for the grid.
-		grid.setSource();
-		grid.setTarget();
-	}
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {			//sets up obstacles for the grid.
+			grid.setSource();
+			grid.setTarget();
+		}
 
-	if (algo != nullptr && sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-		solve = true;
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+			solve = true;
+		}
 	}
 
 	if (solve){
@@ -84,6 +91,7 @@ void Game::update() {											//update game
 		algo->SolveAlgorithm(srcpos,targetpos,Obstacles,grid,createwindow);
 		algo->constructPath(grid);
 		solve = false;
+		graphtype = graphtype + " solved!";
 	}
 	
 	createwindow.clear();

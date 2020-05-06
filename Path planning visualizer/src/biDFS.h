@@ -16,6 +16,8 @@ private:
 	Graph &graph;
 	Location srcpos;
 	Location targetpos;
+	sf::Text text;
+	sf::Font font;
 	node* intersectnode;
 	node* otherparent;
 	std::stack<node*> srcStack;

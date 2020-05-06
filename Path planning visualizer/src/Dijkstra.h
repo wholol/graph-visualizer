@@ -16,6 +16,8 @@ private:
 	Graph &graph;
 	Location srcpos;
 	Location targetpos;
+	sf::Text text;
+	sf::Font font;
 	bool targetreached = false;
 	std::list<node*> pq;
 	std::unordered_set<node*> openSet;

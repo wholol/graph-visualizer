@@ -3,7 +3,16 @@
 
 biBFS::biBFS(Graph & graph)
 	:graph(graph)
-{}
+{
+	if (!font.loadFromFile("fonts/Bebas-Regular.ttf")) {}
+	text.setFont(font);
+	text.setString("Solving biBFS..");
+	text.setPosition(sf::Vector2f(5, 0));
+	text.setFillColor(sf::Color::Green);
+	text.setOutlineColor(sf::Color::Black);
+	text.setOutlineThickness(2);
+	text.setCharacterSize(25);
+}
 
 void biBFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, const std::vector<Location>& obstacles, Grid& grid, sf::RenderWindow& createwindow)
 {
@@ -29,6 +38,7 @@ void biBFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, co
 			
 			grid.ColourVisitedTile(srccurr->nodeloc);
 			grid.drawGrid();
+			createwindow.draw(text);
 			createwindow.display();
 
 			for (auto &neighbour : srccurr->neighbours) {
@@ -62,6 +72,7 @@ void biBFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, co
 			
 			grid.ColourVisitedTile(targetcurr->nodeloc);		//colour current location
 			grid.drawGrid();
+			createwindow.draw(text);
 			createwindow.display();
 
 			for (auto &neighbour : targetcurr->neighbours) {
