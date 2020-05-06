@@ -6,6 +6,8 @@
 Graph::Graph(std::tuple<int,int> getNumTile)
 {
 	auto[totalXTiles, totalYTiles] = getNumTile;
+	this->totalXTiles = totalXTiles;
+	this->totalYTiles = totalYTiles;
 
 	for (int i = 0; i < totalXTiles; ++i) {
 		for (int j = 0; j < totalYTiles; ++j) {

@@ -28,7 +28,6 @@ public:
 private:
 	bool quitgame = false;			//quit game
 	std::unique_ptr<Algorithm> algo;
-	AlgorithmFactory algofactory;
 	Grid grid;
 	Graph graph;
 	sf::Text text;

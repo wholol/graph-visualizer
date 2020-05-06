@@ -70,7 +70,7 @@ void Game::update() {											//update game
 			graphtype = "BestFS";
 		}
 
-		algo = std::move(algofactory.generateAlgorithm(graphtype, graph));
+		algo = std::move(AlgorithmFactory::generateAlgorithm(graphtype, graph));	//generate algorithm
 		text.setString(graphtype);
 	}
 
