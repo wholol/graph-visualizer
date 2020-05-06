@@ -166,6 +166,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\AStar.cpp" />
+    <ClCompile Include="src\BestFS.cpp" />
     <ClCompile Include="src\BFS.cpp" />
     <ClCompile Include="src\BiBFS.cpp" />
     <ClCompile Include="src\biDFS.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="src\Algorithm.h" />
     <ClInclude Include="src\AlgorithmFactory.h" />
     <ClInclude Include="src\AStar.h" />
+    <ClInclude Include="src\BestFS.h" />
     <ClInclude Include="src\BFS.h" />
     <ClInclude Include="src\BiBFS.h" />
     <ClInclude Include="src\biDFS.h" />

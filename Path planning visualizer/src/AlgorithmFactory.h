@@ -33,6 +33,10 @@ public:
 		else if (graphtype == "Dijkstra") {
 			return std::make_unique<Dijkstra>(graph);
 		}
+
+		else if (graphtype == "BestFS") {
+			return std::make_unique<BestFS>(graph);
+		}
 		else return nullptr;
 	}
 

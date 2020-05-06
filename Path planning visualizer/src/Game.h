@@ -9,8 +9,9 @@
 #include "Dijkstra.h"
 #include "BiBFS.h"
 #include "biDFS.h"
+#include "BestFS.h"
 #include "AlgorithmFactory.h"
-#include "AlgorithmFactory.h"
+
 
 class Game {			//game class. should have render, update/events, quit and initialize.
 
@@ -20,11 +21,9 @@ public:
 	Game(const Game& other) = delete;					//no deep copying a game object
 	Game(Game &&other) = delete;						//no moving game object
 	~Game();
-
 	void update();					//update logic
 	void render();					//rende r
 	bool quit();					//quit the window
-
 
 private:
 	bool quitgame = false;			//quit game

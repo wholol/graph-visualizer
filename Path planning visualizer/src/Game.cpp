@@ -63,6 +63,13 @@ void Game::update() {											//update game
 			graph.resetGraph();
 			graphtype = "biDFS";
 		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::U)) {
+			grid.resetGrid();
+			graph.resetGraph();
+			graphtype = "BestFS";
+		}
+
 		algo = std::move(algofactory.generateAlgorithm(graphtype, graph));
 		text.setString(graphtype);
 	}
