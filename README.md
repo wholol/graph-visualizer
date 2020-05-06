@@ -1,5 +1,7 @@
 # Path-planning-visualizer
-Instructions on using the program shown below. An Euclidean distance grid based Path planning Visualizer for basic graph algorithms!  
+Instructions on using the program shown below.  
+  
+An Euclidean distance grid based Path planning Visualizer for basic graph algorithms!  
 <img src="images/astar begin.png" width="400" height="400">    <img src="images/astar solving.png" width="400" height="400">  
   
 ## Algorithms Involved   
