@@ -1,5 +1,5 @@
 # Path-planning-visualizer
-An Euclidean grid based Path planning Visualizer for basic graph algorithms!
+An Euclidean distance grid based Path planning Visualizer for basic graph algorithms!
  
 ## Algorithms  
 ### A* algorithm  
