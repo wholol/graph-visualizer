@@ -30,7 +30,7 @@ void BFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 
 	while (!deque.empty() && !targetreached) {
 
-		node* curr = std::move(deque.front());		//get the current location
+		node* curr = deque.front();		//get the current location
 		deque.pop_front();
 		grid.ColourVisitedTile(curr->nodeloc);		//colour current location
 

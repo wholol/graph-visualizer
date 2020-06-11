@@ -30,7 +30,7 @@ void DFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, cons
 
 	while (!stack.empty() && !targetreached) {				
 
-		node* curr = std::move(stack.top());
+		node* curr = stack.top();
 		stack.pop();
 		grid.ColourVisitedTile(curr->nodeloc);
 

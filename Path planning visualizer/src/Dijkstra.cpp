@@ -7,7 +7,7 @@ Dijkstra::Dijkstra(Graph &graph)
 {
 	if (!font.loadFromFile("fonts/Bebas-Regular.ttf")) {}
 	text.setFont(font);
-	text.setString("Solving biDFS..");
+	text.setString("Solving Dijsktra..");
 	text.setPosition(sf::Vector2f(5, 0));
 	text.setFillColor(sf::Color::Green);
 	text.setOutlineColor(sf::Color::Black);
@@ -36,7 +36,7 @@ void Dijkstra::SolveAlgorithm(const Location & srcpos, const Location & targetpo
 
 	while (!pq.empty() && !targetreached) {		//while priority queue is not empty
 		pq.sort(gCostcomparator);
-		node* curr = std::move(pq.front());
+		node* curr = pq.front();
 		pq.pop_front();								//pop from queue.
 		curr->Visited = true;
 		grid.ColourVisitedTile(curr->nodeloc);

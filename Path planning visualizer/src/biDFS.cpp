@@ -33,7 +33,7 @@ void biDFS::SolveAlgorithm(const Location & srcpos, const Location & targetpos, 
 	while (!srcStack.empty() && !targetStack.empty() && !intersect) {
 
 		if (!srcStack.empty()) {
-			node* srccurr = std::move(srcStack.top());		//get the current location
+			node* srccurr = srcStack.top();		//get the current location
 			srcStack.pop();
 			
 			grid.ColourVisitedTile(srccurr->nodeloc);

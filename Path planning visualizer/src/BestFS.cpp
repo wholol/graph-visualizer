@@ -35,7 +35,7 @@ void BestFS::SolveAlgorithm(const Location & srcpos, const Location & targetpos,
 
 	while (!pq.empty() && !targetreached) {		//while priority queue is not empty
 		pq.sort(gCostcomparator);
-		node* curr = std::move(pq.front());
+		node* curr = pq.front();
 		pq.pop_front();								//pop from queue.
 		curr->Visited = true;
 		grid.ColourVisitedTile(curr->nodeloc);

@@ -33,7 +33,7 @@ void biBFS::SolveAlgorithm(const Location& srcpos, const Location& targetpos, co
 	while (!srcStack.empty() && !targetStack.empty() && !intersect) {
 
 		if (!srcStack.empty()) {
-			node* srccurr = std::move(srcStack.front());		//get the current location
+			node* srccurr = srcStack.front();		//get the current location
 			srcStack.pop_front();
 			
 			grid.ColourVisitedTile(srccurr->nodeloc);
